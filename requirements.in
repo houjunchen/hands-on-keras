@@ -1,0 +1,8 @@
+numpy
+scipy
+future
+matplotlib
+scikit-learn
+tensorflow
+theano
+keras
