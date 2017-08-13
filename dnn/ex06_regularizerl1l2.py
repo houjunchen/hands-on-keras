@@ -7,6 +7,7 @@ execfile('00_readingInput.py')
 
 ''' Import l1,l2 (regularizer) '''
 # (Do!) 從 keras.regularizer 中 import l1,l2 兩種 regularizer
+from keras.regularizers import l1, l2
 
 ''' set the size of mini-batch and number of epochs'''
 batch_size = 16
@@ -19,30 +20,33 @@ from keras.layers.core import Dense, Activation
 print('Building a model with regularizer L2')
 model_l2 = Sequential()
 # (Do!) 請加入 L2 regularizer
-model_l2.add(Dense(128, input_dim=200))
+model_l2.add(Dense(128, input_dim=200, kernel_regularizer=l2(0.01)))
 model_l2.add(Activation('relu'))
 
 # (Do!) 請加入 L2 regularizer
-model_l2.add(Dense(256))
+model_l2.add(Dense(256, kernel_regularizer=l2(0.01)))
 model_l2.add(Activation('relu'))
 
 # (Do!) 請加入 L2 regularizer
-model_l2.add(Dense(5))
+model_l2.add(Dense(5, kernel_regularizer=l2(0.01)))
 model_l2.add(Activation('softmax'))
 
 ''' Setting optimizer as Adam '''
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
-model_l2.compile(loss= 'categorical_crossentropy',
-              	optimizer='Adam',
-              	metrics=['accuracy'])
+model_l2.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
-history_l2 = model_l2.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_l2 = model_l2.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 loss_l2 = history_l2.history.get('loss')
 acc_l2 = history_l2.history.get('acc')
 val_loss_l2 = history_l2.history.get('val_loss')
@@ -60,17 +64,20 @@ model_adam.add(Activation('softmax'))
 
 ''' Setting optimizer as Adam '''
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
-model_adam.compile(loss= 'categorical_crossentropy',
-              		optimizer='Adam',
-              		metrics=['accuracy'])
+model_adam.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
-history_adam = model_adam.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_adam = model_adam.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 ''' Access the performance on validation data '''
 loss_adam = history_adam.history.get('loss')
