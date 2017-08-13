@@ -34,7 +34,7 @@ model.compile(	loss='',
 
 ''' Set the size of mini-batch and number of epochs'''
 ''' Fit models and use validation_split=0.1 '''
-# (Do!) 指定 batch_size, epochs, shuffle or not 
+# (Do!) 指定 batch_size, epochs, shuffle or not
 # 		與 validation_split 的比例
 history = model.fit( X_train, # X_train
 					 Y_train, # Y_train
@@ -42,7 +42,7 @@ history = model.fit( X_train, # X_train
 					 epochs=, # epochs
 					 shuffle=, # shuffle
 					 validation_split=, # validation_split
-					 verbose=0)	
+					 verbose=0)
 
 '''Access the loss and accuracy in every epoch'''
 loss	= history.history.get('loss')
