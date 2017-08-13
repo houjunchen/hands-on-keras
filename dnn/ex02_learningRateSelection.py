@@ -26,19 +26,25 @@ model_large.add(Activation('softmax'))
 ''' set the learning rate of SGD optimizer to 0.1 '''
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
 # (Do!) 設定一個較大的 learning rate
-sgd_large = SGD(lr= , # 填入一個數字, ex: 0.1
-				momentum=0.0,decay=0.0,nesterov=False)
+sgd_large = SGD(
+    lr=0.1, # 填入一個數字, ex: 0.1
+    momentum=0.0,
+    decay=0.0,
+    nesterov=False)
 
-model_large.compile(loss= 'categorical_crossentropy',
-              optimizer=sgd_large,
-              metrics=['accuracy'])
+model_large.compile(
+    loss= 'categorical_crossentropy',
+    optimizer=sgd_large,
+    metrics=['accuracy'])
 
-history_large = model_large.fit(X_train, Y_train,
-								batch_size=batch_size,
-								epochs=epochs,
-								verbose=0,
-								shuffle=True,
-                    			validation_split=0.1)
+history_large = model_large.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_large = history_large.history.get('loss')
 acc_large = history_large.history.get('acc')
@@ -56,19 +62,25 @@ model_median.add(Activation('softmax'))
 
 ''' set the learning rate of SGD optimizer to 0.01 '''
 # (Do!) 設定一個比 sgd_large 還小 learning rate
-sgd_median = SGD(lr=, # 填入一個數字, ex: 0.01
-				momentum=0.0,decay=0.0,nesterov=False)
+sgd_median = SGD(
+    lr=0.01, # 填入一個數字, ex: 0.01
+    momentum=0.0,
+    decay=0.0,
+    nesterov=False)
 
-model_median.compile(loss= 'categorical_crossentropy',
-              optimizer=sgd_median ,
-              metrics=['accuracy'])
+model_median.compile(
+    loss='categorical_crossentropy',
+    optimizer=sgd_median ,
+    metrics=['accuracy'])
 
-history_median = model_median.fit(X_train, Y_train,
-						batch_size=batch_size,
-						epochs=epochs,
-						verbose=0,
-						shuffle=True,
-                    	validation_split=0.1)
+history_median = model_median.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_median = history_median.history.get('loss')
 acc_median = history_median.history.get('acc')
@@ -85,19 +97,25 @@ model_small.add(Activation('softmax'))
 
 ''' set the learning rate of SGD optimizer to 0.001 '''
 # (Do!) 設定一個比 sgd_median還小 learning rate
-sgd_small = SGD(lr=, # 填入一個數字, ex: 0.001
-				momentum=0.0,decay=0.0,nesterov=False)
+sgd_small = SGD(
+    lr=0.001, # 填入一個數字, ex: 0.001
+    momentum=0.0,
+    decay=0.0,
+    nesterov=False)
 
-model_small.compile(loss= 'categorical_crossentropy',
-              optimizer=sgd_small,
-              metrics=['accuracy'])
+model_small.compile(
+    loss='categorical_crossentropy',
+    optimizer=sgd_small,
+    metrics=['accuracy'])
 
-history_small = model_small.fit(X_train, Y_train,
-						batch_size=batch_size,
-						epochs=epochs,
-						verbose=0,
-						shuffle=True,
-                    	validation_split=0.1)
+history_small = model_small.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_small = history_small.history.get('loss')
 acc_small = history_small.history.get('acc')
