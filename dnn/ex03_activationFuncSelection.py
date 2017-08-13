@@ -18,26 +18,32 @@ print('Building model using other activation functions')
 model_sp = Sequential()
 model_sp.add(Dense(128, input_dim=200))
 # (Do!) 加入 activation function
+model_sp.add(Activation('relu'))
 model_sp.add(Dense(256))
 # (Do!) 加入 activation function
+model_sp.add(Activation('relu'))
 model_sp.add(Dense(5))
 # (Do!) 加入 activation function
+model_sp.add(Activation('softmax'))
 
 ''' Use SGD(lr=0.01) as the optimizer  '''
 ''' lr set to 0.01 according to 02_learningRateSelection.py '''
 from keras.optimizers import SGD
-sgd = SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
+sgd = SGD(lr=0.001,momentum=0.0,decay=0.0,nesterov=False)
 
-model_sp.compile(loss= 'categorical_crossentropy',
-              optimizer=sgd,
-              metrics=['accuracy'])
+model_sp.compile(
+    loss= 'categorical_crossentropy',
+    optimizer=sgd,
+    metrics=['accuracy'])
 
-history_sp = model_sp.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_sp = model_sp.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_sp = history_sp.history.get('loss')
 acc_sp = history_sp.history.get('acc')
@@ -51,18 +57,21 @@ model_bm.add(Activation('sigmoid'))
 model_bm.add(Dense(5))
 model_bm.add(Activation('softmax'))
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
-sgd = SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
-model_bm.compile(loss='categorical_crossentropy',
-				optimizer=sgd,
-				metrics=['accuracy'])
-history_bm = model_bm.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
-loss_bm	= history_bm.history.get('loss')
-acc_bm 	= history_bm.history.get('acc')
+sgd = SGD(lr=0.001,momentum=0.0,decay=0.0,nesterov=False)
+model_bm.compile(
+    loss='categorical_crossentropy',
+    optimizer=sgd,
+    metrics=['accuracy'])
+history_bm = model_bm.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
+loss_bm = history_bm.history.get('loss')
+acc_bm = history_bm.history.get('acc')
 
 import matplotlib.pyplot as plt
 plt.figure(0)
