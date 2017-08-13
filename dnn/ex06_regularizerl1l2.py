@@ -6,7 +6,7 @@ import numpy as np
 execfile('00_readingInput.py')
 
 ''' Import l1,l2 (regularizer) '''
-# (Do!) 從 keras.regularizer 中 import l1,l2 兩種 regularizer 
+# (Do!) 從 keras.regularizer 中 import l1,l2 兩種 regularizer
 
 ''' set the size of mini-batch and number of epochs'''
 batch_size = 16

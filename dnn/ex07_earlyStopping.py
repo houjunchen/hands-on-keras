@@ -6,7 +6,7 @@ import numpy as np
 execfile('00_readingInput.py')
 
 ''' EarlyStopping '''
-# (Do!) 從 keras.callbacks 中 import EerlyStopping 
+# (Do!) 從 keras.callbacks 中 import EerlyStopping
 # 		並設定 monitor 與 patience
 
 
