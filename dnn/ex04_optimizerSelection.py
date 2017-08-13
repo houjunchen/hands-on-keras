@@ -25,14 +25,20 @@ model_adam.add(Activation('softmax'))
 ''' Setting optimizer as Adam '''
 from keras.optimizers import  Adam
 # (Do!) 請在 compile model_adam 時使用 'Adam' 當作 optimizer
+model_adam.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
-history_adam = model_adam.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_adam = model_adam.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_adam= history_adam.history.get('loss')
 acc_adam = history_adam.history.get('acc')
@@ -47,16 +53,19 @@ model_sgd.add(Dense(5))
 model_sgd.add(Activation('softmax'))
 
 ''' Setting optimizer as SGD '''
-model_sgd.compile(loss='categorical_crossentropy',
-				optimizer='SGD',
-				metrics=['accuracy'])
+model_sgd.compile(
+    loss='categorical_crossentropy',
+    optimizer='SGD',
+    metrics=['accuracy'])
 
-history_sgd = model_sgd.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_sgd = model_sgd.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
 loss_sgd= history_sgd.history.get('loss')
 acc_sgd = history_sgd.history.get('acc')
