@@ -13,7 +13,7 @@ epochs = 50
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation
 
-print 'Building a model whose optimizer=adam, activation function=relu'
+print('Building a model whose optimizer=adam, activation function=relu')
 model_adam = Sequential()
 model_adam.add(Dense(128, input_dim=200))
 model_adam.add(Activation('relu'))
@@ -24,19 +24,22 @@ model_adam.add(Activation('softmax'))
 
 ''' Setting optimizer as Adam '''
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
-model_adam.compile(loss= 'categorical_crossentropy',
-              		optimizer='Adam',
-              		metrics=['accuracy'])
+model_adam.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
-history_adam = model_adam.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_adam = model_adam.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
-loss_adam= history_adam.history.get('loss')
+loss_adam = history_adam.history.get('loss')
 acc_adam = history_adam.history.get('acc')
 
 ''' Access the performance on validation data '''
