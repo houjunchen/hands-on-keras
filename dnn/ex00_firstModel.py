@@ -14,13 +14,19 @@ from keras.layers.core import Dense, Activation
 model = Sequential()
 # (Do!) 加入 hidden layer of 128 neurons 與指定 input_dim=200
 #       用 'sigmoid' 當作 activation function
+model.add(Dense(128, input_dim=200))
+model.add(Activation('sigmoid'))
 
 # (Do!) 加入 hidden layer of 256 neurons
-#		使用 'sigmoid' 當作 activation function
+#       使用 'sigmoid' 當作 activation function
+model.add(Dense(256))
+model.add(Activation('sigmoid'))
 
 # (Do!) 加入 output layer of 5 neurons
-# 		使用 'softmax'  當作 activation function
+#       使用 'softmax'  當作 activation function
+model.add(Dense(5, activation='softmax', name='output'))
 
+model.summary()
 
 ''' Set up the optimizer '''
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
@@ -28,25 +34,23 @@ sgd = SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
 
 ''' Compile model with specified loss and optimizer '''
 # (Do!) 指定 loss function
-model.compile(	loss='',
-				optimizer=sgd,
-				metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 ''' Set the size of mini-batch and number of epochs'''
 ''' Fit models and use validation_split=0.1 '''
 # (Do!) 指定 batch_size, epochs, shuffle or not
-# 		與 validation_split 的比例
-history = model.fit( X_train, # X_train
-					 Y_train, # Y_train
-					 batch_size=, # batch_size
-					 epochs=, # epochs
-					 shuffle=, # shuffle
-					 validation_split=, # validation_split
-					 verbose=0)
+#       與 validation_split 的比例
+history = model.fit(X_train, # X_train
+                    Y_train, # Y_train
+                    batch_size=16, # batch_size
+                    epochs=30, # epochs
+                    shuffle=True, # shuffle
+                    validation_split=0.1, # validation_split
+                    verbose=0)
 
 '''Access the loss and accuracy in every epoch'''
-loss	= history.history.get('loss')
-acc 	= history.history.get('acc')
+loss = history.history.get('loss')
+acc = history.history.get('acc')
 
 ''' Visualize the loss and accuracy of both models'''
 import matplotlib.pyplot as plt
