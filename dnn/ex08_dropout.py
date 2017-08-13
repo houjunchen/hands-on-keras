@@ -13,36 +13,41 @@ epochs = 100
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 
-print('Building a model with dropout = 0.4')
+print('Building a model with dropout = 0.5')
 # (Do!) 請幫下方的 model 加入適當的 DropOut layer
 model_adam = Sequential()
 model_adam.add(Dense(128, input_dim=200))
 model_adam.add(Activation('relu'))
 # Add dropout
+model_adam.add(Dropout(0.5))
 
 model_adam.add(Dense(256))
 model_adam.add(Activation('relu'))
 # Add Dropout
+model_adam.add(Dropout(0.5))
 
 model_adam.add(Dense(5))
 model_adam.add(Activation('softmax'))
 # DO NOT add dropout at output layer
 
 ''' Setting optimizer as Adam '''
-from keras.optimizers import  Adam
-model_adam.compile(loss= 'categorical_crossentropy',
-              		optimizer='Adam',
-              		metrics=['accuracy'])
+from keras.optimizers import Adam
+model_adam.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
-history_adam = model_adam.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+history_adam = model_adam.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1)
 
-loss_adam= history_adam.history.get('loss')
+loss_adam = history_adam.history.get('loss')
 acc_adam = history_adam.history.get('acc')
 val_loss_adam = history_adam.history.get('val_loss')
 val_acc_adam = history_adam.history.get('val_acc')
