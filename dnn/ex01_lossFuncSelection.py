@@ -36,15 +36,15 @@ sgd = SGD(lr=0.01,momentum=0.0,decay=0.0,nesterov=False)
 ''' Compile model with specified loss and optimizer '''
 # Do it here
 ''' please use categorical_crossentropy as loss'''
-model_ce.compile(loss='',
-				optimizer='SGD',
-				metrics=['accuracy'])
+model_ce.compile(loss='categorical_crossentropy',
+                 optimizer='SGD',
+                 metrics=['accuracy'])
 
 # Do it here
 ''' please use mean_squared_error as loss'''
-model_mse.compile(loss= '',
-              optimizer='SGD',
-              metrics=['accuracy'])
+model_mse.compile(loss= 'mean_squared_error',
+                  optimizer='SGD',
+                  metrics=['accuracy'])
 
 ''' set the size of mini-batch and number of epochs'''
 batch_size = 16
@@ -52,22 +52,22 @@ epochs = 30
 
 '''Fit models and use validation_split=0.1 '''
 history_ce = model_ce.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+                          batch_size=batch_size,
+                          epochs=epochs,
+                          verbose=0,
+                          shuffle=True,
+                          validation_split=0.1)
 
 history_mse = model_mse.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1)
+                            batch_size=batch_size,
+                            epochs=epochs,
+                            verbose=0,
+                            shuffle=True,
+                            validation_split=0.1)
 
 '''Access the loss and accuracy in every epoch'''
-loss_ce	= history_ce.history.get('loss')
-acc_ce 	= history_ce.history.get('acc')
+loss_ce = history_ce.history.get('loss')
+acc_ce = history_ce.history.get('acc')
 loss_mse= history_mse.history.get('loss')
 acc_mse = history_mse.history.get('acc')
 
