@@ -6,3 +6,4 @@ scikit-learn
 tensorflow
 theano
 keras
+h5py
