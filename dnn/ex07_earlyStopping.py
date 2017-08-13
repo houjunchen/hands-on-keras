@@ -7,7 +7,9 @@ execfile('00_readingInput.py')
 
 ''' EarlyStopping '''
 # (Do!) 從 keras.callbacks 中 import EerlyStopping
-# 		並設定 monitor 與 patience
+#       並設定 monitor 與 patience
+from keras.callbacks import EarlyStopping
+earlyStopping = EarlyStopping(monitor='val_loss', patience=3)
 
 
 ''' set the size of mini-batch and number of epochs'''
@@ -18,7 +20,7 @@ epochs = 50
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation
 
-print 'Building a model whose optimizer=adam, activation function=relu'
+print('Building a model whose optimizer=adam, activation function=relu')
 model_adam = Sequential()
 model_adam.add(Dense(128, input_dim=200))
 model_adam.add(Activation('relu'))
@@ -29,22 +31,24 @@ model_adam.add(Activation('softmax'))
 
 ''' Setting optimizer as Adam '''
 from keras.optimizers import Adam
-model_adam.compile(loss= 'categorical_crossentropy',
-              		optimizer='Adam',
-              		metrics=['accuracy'])
+model_adam.compile(
+    loss='categorical_crossentropy',
+    optimizer='Adam',
+    metrics=['accuracy'])
 
 '''Fit models and use validation_split=0.1 '''
 # (Do!) 在 fit 時加入 callbacks
-#  		把先前設定的 EarlyStopping 加入
-history_adam = model_adam.fit(X_train, Y_train,
-							batch_size=batch_size,
-							epochs=epochs,
-							verbose=0,
-							shuffle=True,
-                    		validation_split=0.1,
-                    		# 加入 callbacks
-                    		callbacks=[]
-                    		)
+#       把先前設定的 EarlyStopping 加入
+history_adam = model_adam.fit(
+    X_train,
+    Y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    verbose=0,
+    shuffle=True,
+    validation_split=0.1,
+    # 加入 callbacks
+    callbacks=[earlyStopping])
 
 loss_adam = history_adam.history.get('loss')
 acc_adam = history_adam.history.get('acc')
